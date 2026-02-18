@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/kaldor/laravel-mix-string-replace#readme",
   "devDependencies": {
-    "laravel-mix": "^5.0.7"
+    "laravel-mix": "^6.0.49"
   }
 }
