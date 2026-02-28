@@ -1,0 +1,53 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC
+    - cron: '0 9 * * 1'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run npm audit
+      run: npm audit --audit-level=moderate
+      continue-on-error: true
+    
+    - name: Check for serialize-javascript vulnerability
+      run: |
+        echo "Checking serialize-javascript version..."
+        npm ls serialize-javascript || true
+        
+        # Check if serialize-javascript is at least 7.0.3
+        SERIALIZE_VERSION=$(npm ls serialize-javascript --depth=10 2>&1 | grep -o "serialize-javascript@[0-9.]*" | head -1 | cut -d@ -f2)
+        echo "Current serialize-javascript version: $SERIALIZE_VERSION"
+        
+        if [ ! -z "$SERIALIZE_VERSION" ]; then
+          MAJOR=$(echo $SERIALIZE_VERSION | cut -d. -f1)
+          MINOR=$(echo $SERIALIZE_VERSION | cut -d. -f2)
+          PATCH=$(echo $SERIALIZE_VERSION | cut -d. -f3)
+          
+          if [ "$MAJOR" -lt 7 ] || ([ "$MAJOR" -eq 7 ] && [ "$MINOR" -eq 0 ] && [ "$PATCH" -lt 3 ]); then
+            echo "⚠️ WARNING: serialize-javascript $SERIALIZE_VERSION is vulnerable (CVE: RCE via RegExp.flags)"
+            echo "ℹ️ Upgrade to at least 7.0.3 is recommended"
+          else
+            echo "✅ serialize-javascript version is safe"
+          fi
+        fi
