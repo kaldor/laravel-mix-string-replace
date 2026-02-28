@@ -32,5 +32,5 @@ jobs:
         run: node -e "require('./index.js')"
 
       - name: Run npm audit
-        run: npm audit --audit-level=moderate || true
+        run: npm audit --audit-level=moderate
         continue-on-error: true
