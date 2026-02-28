@@ -2,6 +2,8 @@
 [![Latest Version on NPM](https://img.shields.io/npm/v/laravel-mix-string-replace.svg?style=flat-square)](https://npmjs.com/package/laravel-mix-string-replace)
 [![npm](https://img.shields.io/npm/dt/laravel-mix-string-replace.svg?style=flat-square)](https://www.npmjs.com/package/laravel-mix-string-replace)
 [![Software License](https://img.shields.io/npm/l/laravel-mix-string-replace.svg?style=flat-square)](LICENSE)
+[![CI](https://github.com/kaldor/laravel-mix-string-replace/actions/workflows/ci.yml/badge.svg)](https://github.com/kaldor/laravel-mix-string-replace/actions/workflows/ci.yml)
+[![Security Audit](https://github.com/kaldor/laravel-mix-string-replace/actions/workflows/security.yml/badge.svg)](https://github.com/kaldor/laravel-mix-string-replace/actions/workflows/security.yml)
 
 This extension adds support for [string-replace-loader](https://github.com/Va1/string-replace-loader) to [Laravel Mix](https://github.com/JeffreyWay/laravel-mix).
 
