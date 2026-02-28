@@ -23,6 +23,9 @@
     "url": "https://github.com/kaldor/laravel-mix-string-replace/issues"
   },
   "homepage": "https://github.com/kaldor/laravel-mix-string-replace#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "devDependencies": {
     "laravel-mix": "^6.0.49"
   },
