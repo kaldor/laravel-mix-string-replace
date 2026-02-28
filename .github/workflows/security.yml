@@ -49,7 +49,7 @@ jobs:
                ([ "$MAJOR" -eq 7 ] && [ "$MINOR" -eq 0 ] && \
                 [ "$PATCH" -lt 3 ]); then
               echo "⚠️ WARNING: serialize-javascript $SERIALIZE_VERSION is \
-          vulnerable (CVE: RCE via RegExp.flags)"
+vulnerable (CVE: RCE via RegExp.flags)"
               echo "ℹ️ Upgrade to at least 7.0.3 is recommended"
             else
               echo "✅ serialize-javascript version is safe"
