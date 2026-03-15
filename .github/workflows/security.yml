@@ -60,3 +60,18 @@ jobs:
               echo "✅ serialize-javascript version is safe"
             fi
           fi
+
+      - name: Check elliptic is not present (GHSA-848j-6mx2-7j84)
+        run: |
+          echo "Checking that elliptic is not installed..."
+          # elliptic <=6.6.1 is vulnerable (incorrect ECDSA k-value computation)
+          # It is removed via overriding crypto-browserify with empty-module
+          ELLIPTIC_COUNT=$(npm ls elliptic --depth=10 2>&1 | grep -c "elliptic@" || true)
+          if [ "$ELLIPTIC_COUNT" -gt 0 ]; then
+            echo "❌ ERROR: elliptic is present in the dependency tree (GHSA-848j-6mx2-7j84)"
+            echo "ℹ️ All known versions of elliptic are vulnerable. Remove via overrides."
+            npm ls elliptic --depth=10 || true
+            exit 1
+          else
+            echo "✅ elliptic is not present in the dependency tree"
+          fi
