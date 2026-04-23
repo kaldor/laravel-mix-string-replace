@@ -32,6 +32,7 @@
   "overrides": {
     "serialize-javascript": "^7.0.5",
     "webpack-dev-server": "^5.2.2",
-    "crypto-browserify": "npm:empty-module@0.0.2"
+    "crypto-browserify": "npm:empty-module@0.0.2",
+    "uuid": "^14.0.0"
   }
 }
